@@ -2,13 +2,37 @@
 
 ## Overview
 
-The scripts in this repository shows sample of switching carriers for multi-carrier connectable SIMs.
+The script in this repository shows sample of switching carriers for multi-carrier connectable SIMs.
 
 For example, [plan01s_jp/switch_carrier.sh](plan01s_jp/switch-carrier.sh) switches the carrier from NTT Docomo to SoftBank (or vice versa) when a ping loss occurs.
 
-## Prerequisite
+## Prerequisites
 
-For example, if you use Soracom Onyx LTE USB Modem + Raspberry Pi, run the following commands:
+Please follow the following prerequisites to use the script.
+
+### Hardware
+
+The script has been tested with the combination of the following:
+
+- Raspberry Pi
+- Soracom Onyx LTE USB Modem
+- Soracom IoT SIM
+
+### Raspberry Pi OS
+
+The script has been tested with Raspberry Pi OS Lite, bullseye (2022-04-04).
+
+### SIM type and region
+
+In the script, supported carriers is hard-coded as PLMN (Public Land Mobile Network) Number (e.g. 44010 as NTT Docomo). Supported carriers depend on the SIM type and the region in which the device is located. Please confirm the SIM type and region.
+
+| Script | SIM type | Region |
+| :---  | :--- | :--- |
+| [plan01s_jp/switch_carrier.sh](plan01s_jp/switch-carrier.sh) | plan01s | Japan |
+
+### Software
+
+The script uses Network Manager to connect device to Soracom platform. Please invoke following commands to set up.
 
 ```bash
 # Install a package "Network Manager" for cellular connection
@@ -32,8 +56,6 @@ sudo reboot now
  - switch the carrier to other supported one
 4. `switch_plmn` function uses nmcli to down/up the cellular connectivity interface
 
-NOTE: In scripts, the supported carrier is hard-coded as PLMN (Public Land Mobile Network) Number (e.g. 44010 as NTT Docomo).
-
 ## Warning
 
-The sketches in this repository are examples only and are not guaranteed to work. In addition, the content of this sketch is not intended for commercial use. Please use them at your own risk.
+The script in this repository is example only and is not guaranteed to work. In addition, the content of this script is not intended for commercial use. Please use them at your own risk.
