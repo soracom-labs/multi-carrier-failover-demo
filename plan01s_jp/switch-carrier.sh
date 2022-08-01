@@ -39,7 +39,7 @@ switch_plmn()
 # Check the user
 if [ $UID != 0 ]
 then
-    echo "You must run this script as root. Please try again using \"sudo ./switch-jp-carrier.sh\""
+    echo "You must run this script as root. Please try again using \"sudo $0\""
     exit 1
 fi
 
