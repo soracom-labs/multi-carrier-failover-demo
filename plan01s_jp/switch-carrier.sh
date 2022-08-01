@@ -4,7 +4,7 @@ set -Eeuo pipefail
 switch_plmn()
 {
     # NOTE: this parameter should be different with the countries the SIM connects.
-    current_plmn=$(mmcli -m 0 | grep "operator id" | awk '{print substr($0, index($0, "440"))}')
+    current_plmn=$(mmcli -m 0 | grep -oP "(?<=operator id: )\d+")
     echo "The modem connects to the PLMN ${current_plmn}"
 
     # NOTE: this parameter should be different with the supported PLMN of SIM or module.
@@ -29,7 +29,7 @@ switch_plmn()
     nmcli con up soracom
 
     # NOTE: this parameter should be different with the countries the SIM connects.
-    final_plmn=$(mmcli -m 0 | grep "operator id" | awk '{print substr($0, index($0, "440"))}')
+    final_plmn=$(mmcli -m 0 | grep -oP "(?<=operator id: )\d+")
     echo "The modem switched to the PLMN ${final_plmn}"
 
     exit 0
@@ -44,7 +44,7 @@ then
 fi
 
 count=${COUNT:-10}
-ping_loss_rate=$(ping 8.8.8.8 -c "$count" -I wwan0 | grep "packet loss" | awk -F ' ' '{print $6}')
+ping_loss_rate=$(ping 8.8.8.8 -c "$count" -I wwan0 | grep -oP "\d+%(?= packet loss)")
 
 if [ "$ping_loss_rate" = "" ]
 then
