@@ -43,8 +43,8 @@ then
     exit 1
 fi
 
-PING_SEND_NUMBER=10
-ping_loss_rate=$(ping 8.8.8.8 -c ${PING_SEND_NUMBER} -I wwan0 | grep "packet loss" | awk -F ' ' '{print $6}')
+count=${COUNT:-10}
+ping_loss_rate=$(ping 8.8.8.8 -c "$count" -I wwan0 | grep "packet loss" | awk -F ' ' '{print $6}')
 
 if [ "$ping_loss_rate" = "" ]
 then
