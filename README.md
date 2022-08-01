@@ -34,6 +34,6 @@ sudo reboot now
 
 NOTE: In scripts, the supported carrier is hard-coded as PLMN (Public Land Mobile Network) Number (e.g. 44010 as NTT Docomo).
 
-## Disclaimer
+## Warning
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The sketches in this repository are examples only and are not guaranteed to work. In addition, the content of this sketch is not intended for commercial use. Please use them at your own risk.
