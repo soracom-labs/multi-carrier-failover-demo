@@ -44,7 +44,7 @@ then
 fi
 
 count=${COUNT:-10}
-echo "Begin ping monitoring. it will send ping ${count} times."
+echo "Begin ping monitoring. The scipt will send ping ${count} times."
 ping_loss_rate=$(ping 8.8.8.8 -c "${count}" -I wwan0 | grep -oP "\d+%(?= packet loss)")
 
 if [ "${ping_loss_rate}" = "" ]
