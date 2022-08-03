@@ -1,10 +1,10 @@
 [![test](https://github.com/soracom-labs/multi-carrier-demo/workflows/test/badge.svg)](https://github.com/soracom-labs/multi-carrier-demo/actions/workflows/test.yaml)
 
-# Multi Carrier Demo
+# Multi Carrier Switch Demo
 
 ## Overview
 
-The script in this repository shows sample of switching carriers for multi-carrier connectable SIMs.
+The script in this repository shows an example of switching carriers for multi-carrier connectable SIMs.
 
 For example, [plan01s_jp/switch_carrier.sh](plan01s_jp/switch-carrier.sh) switches the carrier from NTT Docomo to SoftBank (or vice versa) when a ping loss occurs.
 
@@ -26,7 +26,8 @@ The script has been tested with Raspberry Pi OS Lite, bullseye (2022-04-04).
 
 ### SIM type and region
 
-In the script, supported carriers is hard-coded as PLMN (Public Land Mobile Network) Number (e.g. 44010 as NTT Docomo). Supported carriers depend on the SIM type and the region in which the device is located. Please confirm the SIM type and region.
+In the script, supported carriers are hard-coded as PLMN (Public Land Mobile Network) Number (e.g. 44010 as NTT Docomo). Please find a list of possible PLMN codes e.g. on https://www.mcc-mnc.com/  .
+Supported carriers depend on the SIM type and the region in which the device is located. Please confirm the SIM type and region.
 
 | Script | SIM type | Region |
 | :---  | :--- | :--- |
