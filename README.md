@@ -1,3 +1,5 @@
+[![test](https://github.com/soracom-labs/multi-carrier-demo/workflows/test/badge.svg)](https://github.com/soracom-labs/multi-carrier-demo/actions/workflows/test.yaml)
+
 # Multi Carrier Demo
 
 ## Overview
