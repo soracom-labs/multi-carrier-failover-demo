@@ -44,17 +44,17 @@ then
 fi
 
 count=${COUNT:-10}
-ping_loss_rate=$(ping 8.8.8.8 -c "$count" -I wwan0 | grep -oP "\d+%(?= packet loss)")
+echo "Begin ping monitoring. it will send ping ${count} times."
 
 if [ "$ping_loss_rate" = "" ]
 then
-    echo "Something wrong"
+    echo "Something wrong."
     exit 1
 elif [ "$ping_loss_rate" = "100%" ]
 then
-    echo "No ping success"
+    echo "No ping success. The scipt will switch the carrier."
     switch_plmn
 else
-    echo "there is ping success"
+    echo "There is ping success."
     exit 0
 fi
