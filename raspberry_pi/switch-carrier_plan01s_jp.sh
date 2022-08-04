@@ -47,7 +47,7 @@ count=${COUNT:-10}
 
 # When ping_loss_rate is 100%, the ping status code is `1`.
 set +e
-ping_loss_rate=$(ping 8.8.8.8 -c "$count" -I wwan0 | grep -oP "\d+%(?= packet loss)")
+ping_loss_rate=$(ping 8.8.8.8 -c "$count" -I wwan0 -s 2 -w 5 | grep -oP "\d+%(?= packet loss)")
 set -e
 
 if [ "$ping_loss_rate" = "" ]
