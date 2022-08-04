@@ -50,6 +50,7 @@ then
 fi
 
 count=${COUNT:-10}
+echo "Begin ping monitoring. The scipt will send ping ${count} times."
 
 # When ping_loss_rate is 100%, the ping status code is `1`.
 set +e
