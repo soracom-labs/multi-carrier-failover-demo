@@ -37,17 +37,27 @@ Supported carriers depend on the SIM type and the region in which the device is 
 
 The script uses Network Manager to connect device to Soracom platform. Please invoke following commands to set up.
 
+**NOTE**
+
+- If you have already set up the Network Manager or Wvdial, some of the following commands may not be necessary or will cause conflicts. To try this demo, please consider setting up with a clean installed Raspberry Pi OS. 
+- If you SSH to Raspberry Pi via Wi-Fi, you may experience connectivity loss during installing network-manager. In such case, please wait a while or reboot the device and SSH again.
+- If you want to route more traffic through Soracom platform, invoke another `sudo nmcli con modify soracom +ipv4.routes "xxx.xxx.xxx.xxx/xx 0.0.0.0 0"` command (Use your IP address for `xxx.xxx.xxx.xxx` and prefix for `/xx`). You can also invoke `sudo nmcli con modify soracom ipv4.route-metric 0` to route all traffic through Soracom platform.
+
 ```bash
 # Install a package "Network Manager" for cellular connection
-sudo apt-get install network-manager
+sudo apt update && sudo apt install network-manager
 # Configure Network Manager to connect to the Soracom platform
 sudo nmcli con add type gsm ifname "*" con-name soracom apn soracom.io user sora password sora
 # Set up a connection to the Soracom platform using Network Manager
 echo "denyinterfaces wwan0" >> /etc/dhcpcd.conf
-# Set all communication to be routed via Soracom
-sudo nmcli con modify soracom ipv4.route-metric 0
+# Route traffic to Soracom platform services through soracom interface
+sudo nmcli con modify soracom +ipv4.routes "100.127.0.0/16 0.0.0.0 0, 54.250.252.67/32 0.0.0.0 0, 54.250.252.99/32 0.0.0.0 0"
+# Route traffic to Google Public DNS (8.8.8.8) through soracom interface
+sudo nmcli con modify soracom +ipv4.routes "8.8.8.8/32 0.0.0.0 0"
 # Reboot to reflect settings
 sudo reboot now
+# Confirm the device has connected to Soracom platform
+ping pong.soracom.io -c 4
 ```
 
 ## How It Works
