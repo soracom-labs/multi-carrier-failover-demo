@@ -3,11 +3,10 @@ set -Eeuo pipefail
 
 switch_plmn()
 {
-    # NOTE: this parameter should be different with the countries the SIM connects.
     current_plmn=$(mmcli -m 0 | grep -oP "(?<=operator id: )\d+")
     echo "The modem connects to the PLMN ${current_plmn}"
 
-    # NOTE: this parameter should be different with the supported PLMN of SIM or module.
+    # NOTE: this parameter should be different with the countries the SIM connects or the supported PLMN of SIM / module.
     if [ "${current_plmn}" = "44010" ]
     then
         target_plmn=44020
@@ -59,13 +58,13 @@ set -e
 
 if [ "${ping_loss_rate}" = "" ]
 then
-    echo "Something wrong"
+    echo "Error. Something wrong"
     exit 1
 elif [ "${ping_loss_rate}" = "100%" ]
 then
     echo "No ping success"
     switch_plmn
 else
-    echo "there is ping success"
+    echo "There is ping success"
     exit 0
 fi
