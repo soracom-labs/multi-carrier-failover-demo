@@ -8,7 +8,7 @@ switch_plmn()
     echo "The modem connects to the PLMN ${current_plmn}"
 
     # NOTE: this parameter should be different with the supported PLMN of SIM or module.
-    if [ "$current_plmn" = "44010" ]
+    if [ "${current_plmn}" = "44010" ]
     then
         target_plmn=44020
     else
@@ -57,11 +57,11 @@ set +e
 ping_loss_rate=$(ping 8.8.8.8 -c "$count" -I wwan0 -s 2 -w 5 | grep -oP "\d+%(?= packet loss)")
 set -e
 
-if [ "$ping_loss_rate" = "" ]
+if [ "${ping_loss_rate}" = "" ]
 then
     echo "Something wrong"
     exit 1
-elif [ "$ping_loss_rate" = "100%" ]
+elif [ "${ping_loss_rate}" = "100%" ]
 then
     echo "No ping success"
     switch_plmn
