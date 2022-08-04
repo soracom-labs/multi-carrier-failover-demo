@@ -30,9 +30,15 @@ switch_plmn()
 
     # NOTE: this parameter should be different with the countries the SIM connects.
     final_plmn=$(mmcli -m 0 | grep -oP "(?<=operator id: )\d+")
-    echo "The modem switched to the PLMN ${final_plmn}"
 
-    exit 0
+    if [ "${final_plmn}" = "${target_plmn}" ]
+    then
+        echo "The modem successfully switched to the PLMN ${final_plmn}"
+        exit 0
+    else
+        echo "Error. the modem did not switch to the PLMN ${target_plmn}. Current PLMN is ${final_plmn}"
+        exit 1
+    fi
 }
 
 
