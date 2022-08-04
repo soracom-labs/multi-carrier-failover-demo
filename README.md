@@ -1,12 +1,12 @@
 [![test](https://github.com/soracom-labs/multi-carrier-demo/workflows/test/badge.svg)](https://github.com/soracom-labs/multi-carrier-demo/actions/workflows/test.yaml)
 
-# Multi Carrier Switch Demo
+# Multi Carrier Failover Demo
 
 ## Overview
 
-The script in this repository shows an example of switching carriers for multi-carrier connectable SIMs.
+The script in this repository shows an example of failover across carriers for a SIM with multi-carrier connectivity.
 
-For example, [plan01s_jp/switch_carrier.sh](plan01s_jp/switch-carrier.sh) switches the carrier from NTT Docomo to SoftBank (or vice versa) when a ping loss occurs.
+For example, [raspberry_pi/plan01s_jp/switch_carrier.sh](plan01s_jp/switch-carrier.sh) switches the carrier from NTT Docomo to SoftBank (or vice versa) when a ping loss occurs.
 
 ## Prerequisites
 
@@ -26,8 +26,8 @@ The script has been tested with Raspberry Pi OS Lite, bullseye (2022-04-04).
 
 ### SIM type and region
 
-In the script, supported carriers are hard-coded as PLMN (Public Land Mobile Network) Number (e.g. 44010 as NTT Docomo). Please find a list of possible PLMN codes e.g. on https://www.mcc-mnc.com/  .
-Supported carriers depend on the SIM type and the region in which the device is located. Please confirm the SIM type and region.
+In the script, supported carriers are hard-coded as PLMN (Public Land Mobile Network) Number (e.g. 44010 as NTT Docomo). You may find current PLMN (MCC + MNC) in `Soracom User Console > SIM Management > session detail`. If you need to check the PLMNs of other support carrier, you may see them when switching the carriers using Smartphones. You can also find a list of possible PLMN codes on https://www.mcc-mnc.com/ . 
+Please also note that supported carriers depend on the SIM type and the region in which the device is located. Please confirm the SIM type and region.
 
 | Script | SIM type | Region |
 | :---  | :--- | :--- |
@@ -62,12 +62,17 @@ ping pong.soracom.io -c 4
 
 ## How It Works
 
-1. The script checks the ping loss rate
+1. The script checks the ping loss rate to [Google Public DNS](https://developers.google.com/speed/public-dns) (8.8.8.8)
 2. If there's 100% ping loss rate, the script calls `switch_plmn` function
 3. `switch_plmn` function uses mmcli to
  - check the carrier the device is currently connected
  - switch the carrier to other supported one
 4. `switch_plmn` function uses nmcli to down/up the cellular connectivity interface
+
+**NOTE**:
+
+- If switching the carrier fails, please consider extending the `sleep` time.
+- If you do not want to ping to Google Public DNS, please update the script and the routing configuration.
 
 ## Warning
 
