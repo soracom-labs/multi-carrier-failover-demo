@@ -3,12 +3,11 @@ set -Eeuo pipefail
 
 switch_plmn()
 {
-    # NOTE: this parameter should be different with the countries the SIM connects.
     current_plmn=$(mmcli -m 0 | grep -oP "(?<=operator id: )\d+")
     echo "The modem connects to the PLMN ${current_plmn}"
 
-    # NOTE: this parameter should be different with the supported PLMN of SIM or module.
-    if [ "$current_plmn" = "44010" ]
+    # NOTE: this parameter should be different with the countries the SIM connects or the supported PLMN of SIM / module.
+    if [ "${current_plmn}" = "44010" ]
     then
         target_plmn=44020
     else
@@ -30,9 +29,15 @@ switch_plmn()
 
     # NOTE: this parameter should be different with the countries the SIM connects.
     final_plmn=$(mmcli -m 0 | grep -oP "(?<=operator id: )\d+")
-    echo "The modem switched to the PLMN ${final_plmn}"
 
-    exit 0
+    if [ "${final_plmn}" = "${target_plmn}" ]
+    then
+        echo "The modem successfully switched to the PLMN ${final_plmn}"
+        exit 0
+    else
+        echo "Error. the modem did not switch to the PLMN ${target_plmn}. Current PLMN is ${final_plmn}"
+        exit 1
+    fi
 }
 
 
@@ -44,21 +49,22 @@ then
 fi
 
 count=${COUNT:-10}
+echo "Begin ping monitoring. The scipt will send ping ${count} times."
 
 # When ping_loss_rate is 100%, the ping status code is `1`.
 set +e
-ping_loss_rate=$(ping 8.8.8.8 -c "$count" -I wwan0 | grep -oP "\d+%(?= packet loss)")
+ping_loss_rate=$(ping 8.8.8.8 -c "$count" -I wwan0 -s 2 -w 5 | grep -oP "\d+%(?= packet loss)")
 set -e
 
-if [ "$ping_loss_rate" = "" ]
+if [ "${ping_loss_rate}" = "" ]
 then
-    echo "Something wrong"
+    echo "Error. Something wrong"
     exit 1
-elif [ "$ping_loss_rate" = "100%" ]
+elif [ "${ping_loss_rate}" = "100%" ]
 then
     echo "No ping success"
     switch_plmn
 else
-    echo "there is ping success"
+    echo "There is ping success"
     exit 0
 fi
