@@ -32,6 +32,7 @@ Please also note that supported carriers depend on the SIM type and the region i
 | Script | SIM type | Region |
 | :---  | :--- | :--- |
 | [switch-carrier_plan01s_jp.sh](raspberry_pi/switch-carrier_plan01s_jp.sh) | plan01s | Japan |
+| [switch-carrier_plan01s_us.sh](raspberry_pi/switch-carrier_plan01s_us.sh) | plan01s | United States |
 
 ### Software
 
