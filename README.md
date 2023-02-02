@@ -6,7 +6,7 @@
 
 The script in this repository shows an example of failover across carriers for a SIM with multi-carrier connectivity.
 
-For example, [raspberry_pi/plan01s_jp/switch_carrier.sh](plan01s_jp/switch-carrier.sh) switches the carrier from NTT Docomo to SoftBank (or vice versa) when a ping loss occurs.
+For example, [raspberry_pi/plan01s_jp/switch_carrier.sh](raspberry_pi/switch-carrier_plan01s_jp.sh) switches the carrier from NTT Docomo to SoftBank (or vice versa) when a ping loss occurs.
 
 ## Prerequisites
 
@@ -32,6 +32,7 @@ Please also note that supported carriers depend on the SIM type and the region i
 | Script | SIM type | Region |
 | :---  | :--- | :--- |
 | [switch-carrier_plan01s_jp.sh](raspberry_pi/switch-carrier_plan01s_jp.sh) | plan01s | Japan |
+| [switch-carrier_plan01s_us.sh](raspberry_pi/switch-carrier_plan01s_us.sh) | plan01s | United States |
 
 ### Software
 
